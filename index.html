@@ -15,7 +15,7 @@
   header{position:sticky;top:0;background:#fff;border-bottom:1px solid #e5e7f0;z-index:3}
   .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
   .tag{background:var(--chip);border-radius:999px;padding:6px 10px;font-size:13px;color:#445066}
-  .btn{appearance:none;border:1px solid #cfd5e3;background:#fff;border-radius:10px;padding:8px 12px;font-weight:600;cursor:pointer}
+  .btn{appearance:none;border:1px solid #cfd5e3;background:#fff;border-radius:10px;padding:8px 12px;font-weight:600;cursor:pointer;min-height:40px}
   .btn.primary{background:var(--brand);color:#fff;border-color:var(--brand)}
   .btn.ghost{background:transparent}
   .btn:disabled{opacity:.5;cursor:not-allowed}
@@ -27,6 +27,9 @@
   .grid{display:grid;grid-template-columns:repeat(4, minmax(160px,1fr)); gap:18px}
   @media (max-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
   @media (max-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
+  /* 新增：極小螢幕時 1 欄，避免卡片過小 */
+  @media (max-width:380px){.grid{grid-template-columns:1fr}}
+
   .card{background:var(--card);border:2px dashed var(--cardBd);border-radius:16px;padding:12px;cursor:pointer;position:relative;transition:.15s}
   .card:hover{background:var(--cardHover)}
   .card img{width:100%;display:block;border-radius:8px;user-select:none;pointer-events:none}
@@ -38,6 +41,24 @@
   .vol .ctl{display:flex;align-items:center;gap:8px;padding:6px 10px;background:#fff;border:1px solid #e5e7f0;border-radius:10px}
   input[type="range"]{accent-color:var(--brand)}
   footer{color:#5b657a;border-top:1px solid #e5e7f0;font-size:12px}
+
+  /* ===== 手機優化（新增） ===== */
+  @media (max-width:640px){
+    header,footer{padding:12px 14px}
+    main{padding:14px 14px 48px}
+    .h1{font-size:18px}
+    .tag{font-size:12px}
+    .btn{min-height:44px} /* 手機可點擊大小 */
+    .vol{flex-direction:column;gap:10px}
+    .vol .ctl{width:100%;justify-content:space-between}
+    input[type="range"]{width:48%} /* 節省橫向空間 */
+    .pill{font-size:11px}
+  }
+  /* 極小螢幕再緊一點 */
+  @media (max-width:380px){
+    .row{gap:8px}
+    input[type="range"]{width:100%}
+  }
 </style>
 </head>
 <body>
@@ -93,9 +114,9 @@ const ASSETS = [
   { id:'fa_treble_space1',   solfege:'Fa', letter:'F', file:'高音譜號第一間fa五線譜.png' },
   { id:'sol_treble_line2',   solfege:'Sol',letter:'G', file:'高音譜號第二線sol五線譜.png' },
   { id:'fa_bass_line4',      solfege:'Fa', letter:'F', file:'低音譜號第四線fa五線譜.png' },
-  { id:'sol_bass_space4',    solfege:'Sol',letter:'G', file:'低音譜號第四間sol五線譜.png' }, // ←已依你要求改檔名
+  { id:'sol_bass_space4',    solfege:'Sol',letter:'G', file:'低音譜號第四間sol五線譜.png' },
   { id:'la_bass_line5',      solfege:'La', letter:'A', file:'低音譜號第五線la五線譜.png' },
-  { id:'si_bass_spaceUp',    solfege:'Si', letter:'B', file:'低音譜號上加一間si五線譜.png' }  // ←已依你要求改檔名
+  { id:'si_bass_spaceUp',    solfege:'Si', letter:'B', file:'低音譜號上加一間si五線譜.png' }
 ];
 
 // 題目（10 關、固定句子、無混合答案）
